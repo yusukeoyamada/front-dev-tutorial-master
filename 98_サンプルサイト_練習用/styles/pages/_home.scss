@@ -1,3 +1,217 @@
 // メインscssクラス
 @use "../globals/" as *;      // 「"../globals/index"」と同じ意味。
 @use "../parts/common" as *;
+
+.travel {
+  @extend .content-width;   // 「.travel」部分の左右の余白等を指定
+  @extend .mb-lg;           // 「.travel」部分の下の余白を指定
+
+  &__inner {
+    // 画像の内側に影が表示されるように
+    // ローカルスタックコンテキストを生成(z-indexが指定されていないものは、この中に内包)
+    position: relative;
+    z-index: 0;
+
+    @extend .flex;
+    justify-content: space-between; // 左右端の隙間を無くし、均等に横方向に間を開ける
+
+    background-color: $cBgGray;
+    padding: 15px;
+
+    @include mq(md) {
+      padding: 50px;
+    }
+
+    @include mq(xl) {
+      padding: 50px 150px;
+    }
+  }
+
+  &__img {
+    height: 300px;
+    @extend .mb-sm;
+    box-shadow: inset 0 0 30px $cBlack;      // 内側に影をつける場合
+
+    @include mq(md) {
+      flex-basis: 47%;      // 画像とテキストを横に並べる際には、2つ並べるようにする(余白含め)
+    }
+
+    @include mq(lg) {
+      height: 400px;
+    }
+
+    & > img {
+      // 画像の内側に、「__img」で設定した影が表示されるように
+      // ローカルスタックコンテキストの中で最背面に(「__img」の方が、前面に出てくるから、影が見えるように)
+      position: relative;
+      z-index: -1;
+
+      opacity: 1;
+
+      // 以下により、imgのサイズが、「__img」の大きさに合うようになる。
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__texts {
+    @extend .pb-sm;
+
+    @include mq(md) {
+      display: flex;
+      align-items: flex-end; // 「flex-start」だと、横並びの時に、上方向に行く。
+      flex-basis: 47%;       // 画像とテキストを横に並べる際には、2つ並べるようにする(余白含め)
+    }
+
+    &.inview {
+      & .travel__title::before {
+        // animationで、棒線が現れるようにする
+        @include animation(
+          $name: scaleX,
+          $duration: 0.3s,
+          $delay: 1.5s,
+        )
+      }
+    }
+  }
+
+  &__title {
+    position: relative;
+
+    &::before {
+      display: none;              // スマホの時は、棒線が見えないように
+
+      position: absolute;
+      content: '';
+      height: 1px;
+      width: 100px;
+      top: 50%;
+      left: -120px;
+      background-color: $cBlack;
+      transform: scaleX(0);       // 初期状態は、棒線が見えないようにする
+      transform-origin: right;    // 右側を起点にして、アニメーションがなされるようになる
+
+      @include mq(lg) {
+        display: block;           // 一定の媒体の時は、棒線が見えるように
+      }
+    }
+  }
+
+  &__description {
+    @include mq(lg) {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+@keyframes scaleX {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.houses {
+  @extend .content-width; // 「.houses」部分の左右の余白等を指定
+  @extend .mb-lg;         // 「.houses」部分の下の余白を指定
+
+  &__inner {
+    @extend .flex;        // 画像を媒体に応じて、横に並べたり、縦に並べたりする
+  }
+
+  &__item {
+    // 「.flex」で、横並びに切り替わるタイミングが、「md」だから
+    @include mq(md) {
+      flex-basis: 50%;     // 画像を横に並べる際には、2つ並べるようにする
+    }
+    @include mq(lg) {
+      margin-bottom: 60px; // 画像ごとの下の余白を指定
+    }
+  }
+
+  &__title {
+    @extend .mb-sm;       // 「.houses__title」の下の余白を指定
+    @extend .font-lr;     // 「.houses__title」のテキストのサイズを指定
+  }
+
+  &__btn {
+    text-align: center;   // buttonは、インライン要素
+    flex-basis: 100%;     // btnは、1つだけ並べるようにする
+  }
+}
+
+.popular {
+  &__header {
+    @extend .content-width;         // 左右の余白等を指定
+  }
+
+  &__inner {
+    // こっちは、画面一杯に広がって欲しいので、「@extend .content-width」をつけない。
+    position: relative;
+
+    &::before {
+      // ここで、背景灰色を表現する。
+      content: '';
+      position: absolute;
+      bottom: 0;          // ここを起点にする
+      left: 0;            // ここを起点にする
+      height: 90%;        // 10%空けることで、画像とのズレを表現している
+      width: 100%;
+      background-color: $cBgGray;
+    }
+  }
+
+  &__container {
+    position: relative;             // ここはローカスタックコンテキストを生成する為に、設定しただけ
+    z-index: 2;                     // これで、「__inner」よりも、こっちが前面に出る。
+
+    @extend .content-width;         // 左右の余白等を指定
+    @extend .flex;                  // 画像を媒体に応じて、横に並べたり、縦に並べたりする
+    justify-content: space-between; // 左右端の隙間を無くし、均等に横方向に間を開ける
+  }
+
+  &__item {
+    @include mq(md) {
+      flex-basis: 47%;    // 画像を横に並べる際には、2つ並べるようにする(余白含めて)
+    }
+
+    @include mq(lg) {
+      flex-basis: 25%;    // 画像を横に並べる際には、4つ並べるようにする
+    }
+
+    @include mq(xl) {
+      flex-basis: 23%;    // 画像を横に並べる際には、4つ並べるようにする(余白含めて)
+    }
+  }
+
+  &__img {
+    height: 150px;
+    margin-bottom: 5px;            // イレギュラーなものの為、共通クラスは使っていない。
+
+    @include mq(lg) {
+      height: 335px;
+    }
+
+    & > img {
+      height: 100%;                // 画面横幅一杯
+      width: 100%;                 // 「height: 150px;」
+      object-fit: cover;           // imgの「height, width」に合わせて、画像が表示される。
+      // object-position: center;  // 「object-fit: cover」のデフォルトは「center」。画像の真ん中らへんが表示される。
+    }
+  }
+
+  &__title {
+    @extend .mb-sm;       // 下の余白を指定
+    @extend .font-md;     // テキストのサイズを指定
+  }
+
+  &__btn {
+    text-align: center;   // buttonは、インライン要素
+    flex-basis: 100%;     // btnは、1つだけ並べるようにする
+
+    @extend .mb-lg;       // 下の余白を指定
+  }
+}

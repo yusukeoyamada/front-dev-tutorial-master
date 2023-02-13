@@ -15,12 +15,15 @@ class TextAnimation {
         this.DOM.el.classList.toggle('inview');
     }
 }
+
+// TextAnimationを継承しているので、TextAnimationの処理も同時に行なっている部分あり
+// 文字を1文字ずつ分割してclassにcharを付ける処理と、classにinviewを入れる処理などをしている。
 class TweenTextAnimation extends TextAnimation {
     constructor(el) {
         super(el);
         this.DOM.chars = this.DOM.el.querySelectorAll('.char');
     }
-    
+
     animate() {
         this.DOM.el.classList.add('inview');
         this.DOM.chars.forEach((c, i) => {
