@@ -1,3 +1,7 @@
+# 以下教材対応
+- 【2023 年最新】【JavaScript＆CSS】ガチで学びたい人のための WEB 開発実践入門（フロントエンド編）
+  - https://www.udemy.com/course/front-dev-tutorial/
+
 # VSCodeの拡張機能のインストール
 - Prettier - Code formatter  
   `esbenp.prettier-vscode`
