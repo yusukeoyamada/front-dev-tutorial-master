@@ -1,0 +1,32 @@
+/* 親要素にstyleを適用すると、子要素にも適用される。 */
+/* 優先度: 親 < 子 < 子のclass < 「.parent span」という書き方 < 子のID */
+.parent {
+  color: blue;
+  font-weight: 600;
+}
+
+/* 親要素だけでなく、子要素にもstyleを適用すると、子要素の方が詳細度が高いので、そちらが優先される。 */
+/* 優先度: 親 < 子 < 子のclass < 「.parent span」という書き方 < 子のID */
+span {
+  color: purple;
+}
+
+/* 優先度: 親 < 子 < 子のclass < 「.parent span」という書き方 < 子のID */
+.cls {
+  color: orange;
+}
+
+/* 優先度: 親 < 子 < 子のclass < 「.parent span」という書き方 < 子のID */
+.parent span {
+  color: red;
+}
+
+/* 同じセレクタを二重に記述した場合、後者の方が優先される */
+.parent span {
+  color: black;
+}
+
+/* 優先度: 親 < 子 < 子のclass < 「.parent span」という書き方 < 子のID */
+#first {
+  color: magenta;
+}

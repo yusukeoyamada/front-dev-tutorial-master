@@ -1,0 +1,4 @@
+@forward "child"; // 「@use "child"」の代わりに、左記を。
+@forward "child2"; // 読み込んだものを他のファイルに転送する。
+
+@use "child" // globalファイル内で、使用したい場合は、左記をしないといけない。

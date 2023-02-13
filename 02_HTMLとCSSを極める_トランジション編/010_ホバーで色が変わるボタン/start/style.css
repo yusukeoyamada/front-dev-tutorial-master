@@ -1,0 +1,47 @@
+#container {
+  text-align: center;
+}
+
+.btn {
+  background-color: white;
+
+  /* buttonのテキストの色はデフォルト黒だが、念の為 */
+  color: black;
+
+  /* 第1引数: 淵の太さ、第2引数: 淵のスタイル(solidは標準)、第3引数: 淵の色(デフォルトは黒) */
+  border: 1px solid black;
+  /* border: 2px dashed; */
+  /* border: 2px dotted; */
+
+  /* 枠線と文字の間に余白を(プロパティの値: 上右下左(時計回り)) */
+  /* padding: 10px 40px 10px 40px; */
+  padding: 10px 40px; /* 上下左右が同じ値なら省略可能(1つだけ書くと、上右下左、全てに適用) */
+
+  /* 枠線の外に余白を(プロパティの値: 上右下左(時計回り)) */
+  margin: 50px 0; /* 上下左右が同じ値なら省略可能(1つだけ書くと、上右下左、全てに適用) */
+
+  /* 文字の太さ: 100 ~ 900(デフォルト500、100ずつ増える) */
+  font-weight: 600;
+
+  /* ホバーした時に、アイコンがpointerになる */
+  cursor: pointer;
+
+  /* ホバーした時に(状態が変わった時に)ゆっくりスタイルが変更されるように */
+  /* transitionは、移り変わりを定義するプロパティ
+  ( 第1引数は、対象となるプロパティ。
+    第2引数は、掛かる秒数。
+    第3引数は、移り変わりの緩急
+    第4引数は、ホバーしてから、style変更に着手するまでの時間) */
+  /* transition: color 0.3s; */
+  transition: all 0.3s ease 3s;
+
+  /* 対象となるプロパティを複数設定する場合 */
+  /* transition: background-color 0.3s ease 2s,
+              color 0.3s ease 1s; */
+}
+
+/* :hoverでホバーした時という条件になる */
+.btn:hover {
+  background-color: black;
+  color: white;
+}

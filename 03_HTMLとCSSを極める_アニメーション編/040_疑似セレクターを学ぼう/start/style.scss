@@ -1,0 +1,83 @@
+// 以下は全て、擬似セレクタと呼ばれる。
+
+a {
+  color: orange;
+
+  // アイコンを載せている状態に適用される。
+  &:hover {
+    color: red;
+  }
+
+  // クリックしている状態に適用される。
+  &:active {
+    color: purple;
+  }
+
+  // 最後にクリックしたものに適用される。
+  &:focus {
+    color: green;
+  }
+
+  // visitedという擬似セレクタに対して、「color: blue」がブラウザのデフォルト値として設定される。
+  // 既にクリックされている（訪問されている）リンクの状態を表現するもの。
+  &:visited {
+    color: blue;
+  }
+}
+
+div {
+  & span {
+    color: olive;
+
+    // nth-child(3): 3番目のspanを指定(エヌスチャイルドと言う)
+    // nth-child(2n): 2の倍数のspanを指定
+    // nth-child(even): 偶数のspanを指定
+    // nth-child(2n + 1) or nth-child(odd): 奇数のspanを指定
+    // &:nth-child(1) {
+    //   color: purple;
+    // }
+    // &:nth-child(2) {
+    //   color: green;
+    // }
+    // &:nth-child(3) {
+    //   color: blue;
+    // }
+
+    // 上記「nth-child」だと、「<strong>Not Span</strong>」が1番目と捉えられて、以下で指定したstyleは適用されない。
+    // div要素(親要素)の中で、順番を指定するから。
+    // 下記「nth-of-type」だと、「<strong>Not Span</strong>」は1番目と捉えられず、1個目の「<span>Item 1</span>」を1番目と捉えられる。
+    // span要素も考慮して、順番を指定する。
+    // &:nth-of-type(1) {
+    //   color: purple;
+    // }
+    // &:nth-of-type(2) {
+    //   color: green;
+    // }
+    // &:nth-of-type(3) {
+    //   color: blue;
+    // }
+
+    // div要素(親要素)の中の、最初の要素
+    // span要素も考慮しないので、「<strong>Not Span</strong>」が1番目と捉えられて、以下で指定したstyleは適用されない。
+    // 「first-of-type」もある
+    // &:first-child {
+    //   color: purple;
+    // }
+
+    // div要素(親要素)の中の、最後の要素
+    // 「last-of-type」もある
+    // &:last-child {
+    //   color: green;
+    // }
+
+    // 「cls」と言うクラスが指定されていないものを対象とする。
+    &:not(.cls) {
+      color: blue;
+    }
+  }
+
+  // spanの3番目を指定(エヌスチャイルドと言う)
+  // & span:nth-child(3) {
+  //   color: purple;
+  // }
+}

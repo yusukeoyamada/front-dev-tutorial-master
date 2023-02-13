@@ -1,0 +1,26 @@
+.parent {
+  color: blue;
+
+  // 手段(2) 子要素のみに、「color: purple;」を適用する為には、
+  // 「>」をつけて、parentの1階層下のelementだけに適用するようにする。
+  & > .element {
+    color: purple;
+
+    &.second-child {
+      color: black;
+    }
+  }
+}
+
+.element {
+  color: red;
+}
+
+// 以下のように記載しても、「& > .element」よりも詳細度が低いので、適用されない。
+// .second-child {
+//   color: black;
+// }
+
+// .child {
+//   color: purple;
+// }

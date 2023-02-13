@@ -1,0 +1,13 @@
+// @use "child";
+// @use "child2";
+@use "global" as g; // 上記のように逐一useで読み込まなくても良い方法が左記。
+
+h1 {
+  // color: child.$cBlue;
+  color: g.$cBlue;
+}
+
+h2 {
+  // color: child2.$cRed;
+  color: g.$cRed;
+}

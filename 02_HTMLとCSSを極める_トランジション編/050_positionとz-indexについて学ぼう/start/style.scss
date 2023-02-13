@@ -1,0 +1,31 @@
+// positionとは、特定の位置に要素を移動したり、特定の位置に要素を固定化する為のもの
+// 「position: static;」が、デフォルト値
+
+#container {
+  padding: 1rem;
+  background-color: gray;
+}
+
+div {
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 1.1em;
+  width: 150px;
+  height: 150px;
+  box-shadow: 7px 7px 0 0 #000;
+}
+
+.div-1 {
+  background: orange;
+}
+.div-2 {
+  background: tomato;
+}
+.div-3 {
+  background: teal;
+}
+.div-4 {
+  width: 80px;
+  height: 80px;
+  background-color: violet;
+}

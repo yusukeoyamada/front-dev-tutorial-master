@@ -1,0 +1,62 @@
+@use 'mixin' as *;
+
+html {
+  font-family: 'Teko', sans-serif;
+}
+
+body {
+  margin: 0; // 元々「margin: 8」で設定されている。
+  // -------- 以上がベースの設定 --------
+}
+
+#container {
+  position: relative;
+  height: 100vh; // 現在表示されている親要素の縦幅一杯に。
+  // width: 100vh; // ブロック要素は、基本的に、親要素の横幅一杯まで広がるので不要。
+  background-color: teal;
+  // -------- 以上がベースの設定 --------
+}
+
+.animate-title {
+  // 中央揃えにしている方法は以下と覚えておく。
+  position: absolute;
+  top: 50%; // 基準となる位置から下方向にどの程度離れているかを指定
+  left: 50%; // 「left」は右方向。「right」は左方向，「bottom」は上方向へ
+  transform: translate(-50%, -50%);
+  color: white;
+  // -------- 以上がベースの設定 --------
+  opacity: 0;
+  font-size: 2em; // 現在のfontサイズの2倍を「em」で表現できる。
+
+  &.inview {
+    opacity: 1;
+
+    & .char {
+      display: inline-block; // translateを適用させる為に。
+
+      @include animation(
+        $name: kf-animate-chars,
+        $duration: 0.5s,
+        $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1),
+        $fill-mode: both, // 0%でも、100%でもanimationが適用されている状態を保持する為。
+      );
+
+      @for $i from 1 through 9 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.04s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes kf-animate-chars {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%); // 上からfade_inしているように見えるようにする為。
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); // 上からfade_inしているように見えるようにする為。
+  }
+}

@@ -1,0 +1,10 @@
+// @import "child"; // Lib Sassで使われていたが、非推薦。
+@use "child" as c;
+@use "sass:math"; // 「math」を使えるように。
+
+h1 {
+  background: c.$cOrange;
+  // font-size: 30px / 2; // Lib Sassで「/」が使われていたが、非推薦。
+  // font-size: calc(30px / 2); // (1) Dart Sassでのやり方
+  font-size: math.div(30px, 2); // (2) 第1引数を、第2引数で割る。
+}

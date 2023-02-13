@@ -1,0 +1,142 @@
+@use "mixin" as *;
+
+img {
+  max-width: 100%;  // 画像の横幅を親要素の横幅に合わせられる。
+                    // 基本的に、imgに指定することで、要素からはみ出ないようにできる。
+  vertical-align: bottom; // 擬似要素と、画像の下部分に差異がある為、それを修正。下余白を無くせる。
+}
+
+.cover-slide {
+  position: relative;
+  overflow: hidden; // 「scale(1.5)」の際に、画像が枠からはみ出ないようにする。
+
+  &::after {
+    content: '';
+    // 以下で、画像の上に重ねて表示させるように
+    position: absolute;
+    z-index: 2;
+    top: 0;     // 上から「値」で、要素が表示される。
+    bottom: 0;  // 下から「値」で、要素が表示される。
+    left: 50%;    // 左から「値」で、要素が表示される。
+    right: 0;   // 右から「値」で、要素が表示される。
+    background-color: #eaebe6;
+  }
+
+  &.inview {
+    &::after {
+      @include animation(
+        $name: kf-cover-slide,
+        $duration: 1.6s,
+        $timing-function: ease-in-out,
+      );
+    }
+  }
+}
+
+@keyframes kf-cover-slide {
+  // 左から右に流れている感じを表現する為に。
+  0% {
+    // 以下で、左端に押しつぶされている状態を表現できる。
+    left: 0;
+    right: 100%;
+  }
+  50% {
+    // 以下で、全て表示されている状態を表現できる。
+    left: 0;
+    right: 0;
+  }
+  100% {
+    // 以下で、右端に押しつぶされている状態を表現できる。
+    left: 100%;
+    right: 0%;
+  }
+}
+
+.img-zoom {
+  opacity: 0;
+
+  // 「&」は、「.img-zoom」を指す。
+  .inview & {
+    opacity: 1;
+    transition: transform 0.3s ease; // これを入れることで滑らかになる。
+
+    @include animation(
+      $name: kf-img-show,
+      $duration: 1.6s,
+      $timing-function: ease-in-out,
+      $fill-mode: normal, // animationが終わった時に、画像が残らないように
+    );
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+}
+
+@keyframes kf-img-show {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  // 50%の時に、画像を表示させるようにする為に。
+  50.1% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hover-darken {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; // これで「z-index: 2」のafterよりも、下に重ねている。
+    transition: background-color 0.3s ease;
+    pointer-events: none; // これを設定された要素は、マウスの操作を受け付けなくなるので、afterのzoomアニメーションが適用されるように。
+
+    // 画像が現れたタイミングで、ホバーできるように。
+    @include animation(
+      $name: kf-img-show,
+      $duration: 1.6s,
+      $timing-function: ease-in-out,
+      $fill-mode: normal, // animationが終わった時に、画像が残らないように
+    );
+  }
+
+  &:hover::before {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.bg-img-zoom {
+  background-image: url(images/image-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  // 以下で画像が表示できるように
+  width: 100%;
+  // 以下が固定値の場合、縦幅が広がらないので、アスペクト比が変になる時が。
+  // height: 200px;
+
+  // 以下で、「.img-zoom」のクラスを取り込めている。
+  @extend .img-zoom;
+}
+
+.img-bg50 {
+  // 以下で、アスペクト比の不安定さを解消できる。
+  // アスペクト比とは、画面や画像の縦と横の長さ（画素数）の比
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 50%;
+  }
+}

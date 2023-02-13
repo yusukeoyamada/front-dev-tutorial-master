@@ -1,0 +1,21 @@
+// 以下をmapと言う。
+$breakpoints: (
+  'sm': '(min-width: 480px)',  // 480px以上 スマホ横向き(sm: small)
+  'md': '(min-width: 600px)',  // 600px以上 タブレットの横向き(mg: medium)
+  'lg': '(min-width: 960px)',  // 960px以上 ノートPC等の小さなPC(lg: large)
+  'xl': '(min-width: 1280px)', // 1280px以上 デスクトップPC(xl: xlarge)
+);
+
+// 引数: $breakpoint
+// 初期値: md
+// mq(media_queryの略??)
+// mdは、シングルクォーテーションで囲んでも囲まなくても、どちらでも動く
+@mixin mq($breakpoint: md) {
+  // map-getについて(これで上記mapの中身を取ってこれる)
+  // 第1引数: mapを渡す ($breakpoints)
+  // 第2引数: どのキーの値を取得するのかを指定 ($breakpoint) => 初期値「md」の場合、キー「'md'」のものが。
+  @media #{map-get($breakpoints, $breakpoint)} {
+    // 以下、例) 「mq(sm) {}」の「{}」内の記述がここに入る。
+    @content;
+  }
+}

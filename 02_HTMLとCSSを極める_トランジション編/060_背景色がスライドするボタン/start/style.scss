@@ -1,0 +1,56 @@
+$cWhite: white;
+$cBlack: black;
+
+#container {
+  text-align: center;
+}
+
+.btn {
+  background-color: $cWhite;
+  color: $cBlack;
+  border: 1px solid $cBlack;
+  padding: 10px 40px;
+  margin: 50px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  // &:hover {
+  //   background-color: $cBlack;
+  //   color: $cWhite;
+  // }
+
+  &.slide-bg {
+    position: relative; // (解1) これでここが親要素だと認識される。
+    z-index: 1; // (解2) 「position: static」以外で、数値なので、ローカルコンテキストが作成される。
+                // 背景色は最背面、"Button"という文字列との要素の重なり順を定義している。
+
+    overflow: hidden; // slide-bgの枠の外が非表示に。逆は、「visible」を設定。
+
+    & span {
+      // 以下はホバーが完了した前提で、記述している。
+      display: inline-block; // 横幅と縦幅を指定できるようになった
+      width: 100%;
+      height: 100%;
+      background-color: $cBlack;
+
+      // 以下のままだと、親要素「slide-bg」に、relativeがないので、
+      // (問1) ルートを親要素だと認識してしまい、画面の全面の背景色が黒くなってしまっている。
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1; // (解2) slide-bgよりも、数値が低いので背面に表示される。
+
+      transform: translateX(-100%); // (1) ここで位置をずらして
+      transition: transform 0.3s; // transformが適用された時に、0.3秒かけてアニメーションを実行する
+    }
+
+    &:hover {
+      color: $cWhite; // (問2) 現状だとspanの方が、ボタンの文字列より前面に来ているので、文字が白く見えない。
+
+      & span {
+        transform: none; // (2) ここで位置を元に戻している
+      }
+    }
+  }
+}

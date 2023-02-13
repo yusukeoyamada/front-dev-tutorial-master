@@ -1,0 +1,50 @@
+$cBlack: black;
+
+body {
+  text-align: center;
+}
+
+.rect {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: $cBlack;
+  animation: sk-bouncedelay 1.4s;       // 以下のように、色々分けられる為、左記のように、一行で表現するのはお勧めしない。
+
+  animation-timing-function: ease;      // アニメーションが変化する速度
+  // animation-delay: 3s;               // 何秒後にアニメーションを実行するか
+  animation-iteration-count: infinite;  // 何回、アニメーションを実行するか。ここがinfiniteになっていた。
+  // animation-direction: reverse;      // reverse: sk-bouncedelayのアニメーションのfrom_toが逆になる。
+  //                                    // alternate: sk-bouncedelayのアニメーションのfrom_toが折り返しになる。
+  //                                    // alternate-reverse: reverseの状態で、alternateに。
+  // animation-fill-mode: forwards;     // forwards: sk-bouncedelayのアニメーションがtoの状態のまま残る。
+  //                                    // both: sk-bouncedelayのアニメーションがfrom, toの状態がいずれも残る。
+}
+
+// 以下のように、classを設定して、jsで追加でclassを設定してやる方法が使える。
+.paused {
+  animation-play-state: paused; // 設定された時点で、アニメーションが止まる。
+}
+
+// transitionでは、途中経過を表現できない為、途中経過を表現したい時は、animationを使った方が良い。
+@keyframes sk-bouncedelay {
+  // 以下のように、0%と100%を表現できる。
+  // from {
+  //   transform: scale(0);
+  // }
+
+  // to {
+  //   transform: scale(1);
+  // }
+
+  // 下記のように、同時に設定できる。
+  0%, 50% {
+    transform: scale(0);
+    background-color: black;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: green;
+  }
+}

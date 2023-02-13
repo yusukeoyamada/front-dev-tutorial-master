@@ -1,0 +1,79 @@
+.parent {
+  background-color: rgb(81, 218, 218);
+  height: 600px;
+  width: 100%;
+}
+
+.child {
+  background-color: orange;
+  // width: 100px;
+  // height: 100px;
+  font-weight: 600;
+
+  flex-grow: 1; // それぞれが親要素の高さと幅を満たす為に、widthとheightを均等に設定してくれる。
+  flex-basis: 300px; // これだけだと、300pxはそれぞれ取れないので、均等に設定してくれる。
+}
+
+.child.v1 {
+  // flex-basis: 300px; // これを書くと、親要素の高さと幅を満たす為に、まずv1が300px分確保する。その後に配分が決定する。
+  flex-shrink: 0;       // 親要素に「flex-basis: 300px;」がある状態だと、これを追加することで、まずv1が300px確保する。
+                        // 「shrink」は縮むという意味。
+}
+
+.child.v2 {
+  background-color: palevioletred;
+  // flex-grow: 2; // child v1, child v2, child v3 => 「1 : 2 : 3」という配分になる。
+}
+.child.v3 {
+  background-color: rebeccapurple;
+  // flex-grow: 3;
+}
+
+/**
+ * 横方向のレイアウト
+ */
+/* インライン要素を中央揃え */
+// .parent {
+//   text-align: center;
+//   letter-spacing: -6px; // インライン要素の文字の間隔(要素ごとの隙間を埋められる)
+// }
+// .child {
+//   display: inline-block;
+// }
+
+/* ブロック(inline-block含む)要素を中央揃え */
+// .parent {
+// }
+// .child {
+//   margin: 0 auto; // widthが指定されている場合
+//                   // ただ、これは現在ではflexboxで対応している
+// }
+
+/**
+ * 上下方向のレイアウト
+ */
+// 何らかの要素を重ねて配置したい時に、「position: absolute」を使う。
+// 以下は、中央揃えにした場合
+// .parent {
+//   position: relative;
+// }
+
+// .child {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+
+// 何らかの要素を重ねて配置したくない場合に、行う。
+// 以下は、中央揃えにした場合
+.parent {
+  display: flex;                // これだけだと、横並びになる
+  flex-direction: row;          // columnだと、縦並びになる。rowだと、元の横並びになる。
+                                // そして、以下、justify-content(横から縦に)と、align-items(縦から横に)の制御報告が逆になる。
+  justify-content: flex-start;  // 横方向を制御(centerだと、真ん中に。flex-endだと右側に)
+                                // space-aroundだと、均等に横方向に間を開ける
+                                // space-betweenだと、左右端の隙間を無くし、均等に横方向に間を開ける
+  // align-items: flex-end;     // 縦方向を制御(centerだと、真ん中に。flex-endだと右側に)
+  // flex-wrap: wrap;           // 子要素の「flex-basis: 300px;」を必ず適用したい場合は、親要素にこれを設定
+}

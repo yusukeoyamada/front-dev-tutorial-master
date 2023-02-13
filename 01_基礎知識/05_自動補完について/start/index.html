@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 自動補完: #container -->
+    <div id="container"></div>
+    <!-- 自動補完: .cls -->
+    <div class="cls"></div>
+    <!-- 自動補完: span.cls -->
+    <span class="cls"></span>
+    <!-- 自動補完: #container>.cls -->
+    <div id="container">
+      <div class="cls"></div>
+    </div>
+    <!-- 自動補完: #container>.cls*6 -->
+    <div id="container">
+      <div class="cls"></div>
+      <div class="cls"></div>
+      <div class="cls"></div>
+      <div class="cls"></div>
+      <div class="cls"></div>
+      <div class="cls"></div>
+    </div>
+    <!-- 自動補完: #container>.cls-$*6 ($が数字として表現される) -->
+    <div id="container">
+      <div class="cls-1"></div>
+      <div class="cls-2"></div>
+      <div class="cls-3"></div>
+      <div class="cls-4"></div>
+      <div class="cls-5"></div>
+      <div class="cls-6"></div>
+    </div>
+    <!-- 自動補完: #container>.cls-$$*6 -->
+    <div id="container">
+      <div class="cls-01"></div>
+      <div class="cls-02"></div>
+      <div class="cls-03"></div>
+      <div class="cls-04"></div>
+      <div class="cls-05"></div>
+      <div class="cls-06"></div>
+    </div>
+  </body>
+</html>

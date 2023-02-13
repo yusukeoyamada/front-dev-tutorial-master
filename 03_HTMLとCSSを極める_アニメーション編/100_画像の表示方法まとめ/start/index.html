@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 以下が画像表示方法 -->
+    <!-- (1) img -->
+    <!-- altは、googleの画像検索の際に、画像の紹介文を入れたい時に設定 -->
+    <!-- <img src="images/400x250.png" alt="" /> -->
+
+    <!-- imgでsrcsetを使って、pictureのようにすることはできるが厳格ではない。 -->
+    <!-- <img
+      src="images/400x250.png"
+      srcset="
+        images/1100x550.png 1100w,
+        images/800x250.png   800w,
+        images/400x250.png
+      "
+    /> -->
+
+    <!-- (2) background-image -->
+    <!-- divの大きさに合わせて表示させたい場合に、こっちをよく使う。imgだとできなかった -->
+    <div class="bg-img"></div>
+
+    <!-- (3) picture -->
+    <!-- 画面の横幅に合わせて、表示させる画像を管理できる。 -->
+    <!-- 「min-width: 480px」だと、横幅480px以上の場合を指す。 -->
+    <!-- 横 x 縦(ex) 1100x550) -->
+    <!-- <picture>
+      <source media="(min-width:960px)" srcset="images/1100x550.png" />
+      <source media="(min-width:480px)" srcset="images/800x250.png" />
+      <img src="images/400x250.png" alt="test" />
+    </picture> -->
+
+    <style>
+      /* 「object-fit: cover; 」は、「background-size: cover」と同義。IE以外は使える。 */
+      /* img {
+        height: 500px;
+        width: 300px;
+        object-fit: cover;
+      } */
+      .bg-img {
+        height: 500px;
+        /* width: 300px; */
+        background-image: url(images/400x250.png);
+        background-repeat: no-repeat; /* デフォルトで「repeat」になっている */
+        background-size: cover; /* divの要素に合わせて画像が表示される(トリム(調整)されたくない場合は、「contain」にする(基本的には、「cover」)) */
+        background-position: center; /* これをつけると、トリムされず、中央に寄せられる */
+      }
+
+      /* 以下の記載で、「background-image」で、pictureのようにすることはできる。 */
+      @media screen and (min-width: 600px) {
+        .bg-img {
+          background-image: url(images/800x250.png);
+        }
+      }
+    </style>
+  </body>
+</html>

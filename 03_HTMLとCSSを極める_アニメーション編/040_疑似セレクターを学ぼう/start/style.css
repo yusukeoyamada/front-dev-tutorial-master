@@ -1,0 +1,22 @@
+a {
+  color: orange;
+}
+a:hover {
+  color: red;
+}
+a:active {
+  color: purple;
+}
+a:focus {
+  color: green;
+}
+a:visited {
+  color: blue;
+}
+
+div span {
+  color: olive;
+}
+div span:not(.cls) {
+  color: blue;
+}/*# sourceMappingURL=style.css.map */

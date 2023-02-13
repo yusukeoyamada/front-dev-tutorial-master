@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 代表的なインライン要素(左右に要素を配置したい場合) -->
+    <!-- 違い(1): 横幅と縦幅を指定できない -->
+    <span>こんにちは！ 日本！</span>
+    <span>こんにちは！ 日本！</span>
+    <!-- 代表的なブロック要素(上下に要素を配置したい場合) -->
+    <!-- 違い(1): 横幅と縦幅を指定できる -->
+    <div>こんにちは！ 日本！</div>
+    <div>こんにちは！ 日本！</div>
+    <!-- <img src="image-1.jpg" alt="" /> -->
+    <style>
+      body {
+        /* インライン要素を中央揃えにしたい時は、親(spanから見て、body)にstyleを指定する。 */
+        /* 違い(3): ブロック要素には意味をなさない(inline-blockなら可能) */
+        text-align: center;
+      }
+
+      div {
+        width: 300px;
+        height: 400px;
+        /* ブロック要素を中央揃えにしたい時は、該当の要素に以下を指定する。 */
+        margin: 0 auto;
+        background-color: magenta;
+      }
+      span {
+        /* 違い(2): インライン要素に対して、ブロック要素みたいなことができる */
+        /* display: block; */
+        /* display: inline; */
+        /* 横幅と縦幅は反映されるが、基本的には横並び */
+        display: inline-block;
+        width: 300px;
+        height: 400px;
+        background-color: magenta;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+// sassの書き方(変数として定義)
+$cWhite: white;
+$cBlack: black;
+
+#container {
+  text-align: center;
+
+  // 以下は、「#container .btn」、「& .btn」と同様
+  // .btn {
+  // }
+}
+
+.btn {
+  background-color: $cWhite;
+  color: $cBlack;
+  border: 1px solid $cBlack;
+  padding: 10px 40px;
+  margin: 50px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  // sassの書き方(.btn:hoverの場合)。&は、アンバサンドという。
+  &:hover {
+    background-color: $cBlack;
+    color: $cWhite;
+  }
+}
+
+// 以下のように、「 」半角スペースを開ける場合には、上記で「&」を省略できる。開けない場合には、省略できない。
+// #container .btn {
+// }

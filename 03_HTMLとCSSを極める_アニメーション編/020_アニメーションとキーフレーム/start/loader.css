@@ -1,0 +1,28 @@
+body {
+  text-align: center;
+}
+
+.rect {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  animation: sk-bouncedelay 1.4s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+@keyframes sk-bouncedelay {
+  0%, 50% {
+    transform: scale(0);
+    background-color: black;
+  }
+  100% {
+    transform: scale(1);
+    background-color: green;
+  }
+}/*# sourceMappingURL=loader.css.map */

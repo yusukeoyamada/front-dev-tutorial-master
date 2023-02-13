@@ -1,0 +1,38 @@
+/* 以下をセレクタという */
+body {
+  /* 左側がプロパティ。右側がその値 */
+  /* インライン要素の中央揃え*/
+  text-align: center;
+}
+
+/* 詳細度の優先度: ID > class > span */
+span {
+  display: inline-block;
+  /* ブロック要素の中央揃え*/
+  margin: 0 auto;
+  width: 100px;
+  height: 400px;
+  background-color: red;
+}
+
+/* クラスの属性を指定したい場合は、「.」をつける 「ex) .first」 */
+/* IDとclass同時に指定した場合、IDの方がclassよりも、詳細度の優先度が高いので、こっちが優先される */
+.cls {
+  display: inline-block;
+  /* ブロック要素の中央揃え*/
+  margin: 0 auto;
+  width: 100px;
+  height: 400px;
+  background-color: gray;
+}
+
+/* IDの属性を指定したい場合は、「#」をつける 「ex) #first」 */
+/* spanとclass同時に指定した場合、classの方がspanよりも、詳細度の優先度が高いので、こっちが優先される */
+#first {
+  display: inline-block;
+  /* ブロック要素の中央揃え*/
+  margin: 0 auto;
+  width: 100px;
+  height: 400px;
+  background-color: magenta;
+}

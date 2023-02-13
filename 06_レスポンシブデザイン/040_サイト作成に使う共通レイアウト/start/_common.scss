@@ -1,0 +1,92 @@
+@use "mq" as *;
+@use "variables" as *;
+
+.font-sm {
+  font-size: 14px;
+
+  @include mq(lg) {
+    font-size: 16px;
+  }
+}
+
+.font-md {
+  font-size: 17px;
+
+  @include mq(lg) {
+    font-size: 19px;
+  }
+}
+
+.font-lr {
+  font-size: 17px;
+
+  @include mq(lg) {
+    font-size: 23px;
+  }
+}
+
+.font-lg {
+  font-size: 25px;
+
+  @include mq(lg) {
+    font-size: 36px;
+  }
+}
+
+.main-title {
+  @extend .font-lg;
+  font-weight: 600;
+  margin-bottom: 0;
+  display: block;
+}
+
+.sub-title {
+  @extend .font-sm;
+  color: $cSubTitle;
+}
+
+.content-width {
+  // 以下モバイルファーストの記述
+  width: 90%; // モバイルの時に左右に余白が空いている状態
+  margin: 0 auto; // widthが指定されているプロック要素を、自動的に中央揃えにする
+  // 上記のままだと、横幅を広げた状態で、ずっと90%の状態になる。
+  // なので、「$contentMaxWidth」以上、横幅を広げないようにする為の処理は、以下。
+  max-width: $contentMaxWidth;
+}
+
+.flex {
+  // 以下モバイルファーストの記述
+  display: flex;
+  flex-direction: column; // 縦方向に並べる
+
+  @include mq(md) {
+    flex-direction: row; // 横方向に並べる
+    flex-wrap: wrap; // 横並びの要素が折り返して次の行に行ってくれる
+  };
+}
+
+// margin-bottom-smallの略
+.mb-sm {
+  margin-bottom: 16px !important;
+}
+
+.mb-lg {
+  margin-bottom: 80px !important;
+
+  @include mq(lg) {
+    margin-bottom: 150px !important;
+  }
+}
+
+// padding-bottom-smallの略
+.pb-sm {
+  padding-bottom: 16px !important;
+}
+
+.pb-lg {
+  padding-bottom: 80px !important;
+
+  @include mq(lg) {
+    padding-bottom: 150px !important;
+  }
+}

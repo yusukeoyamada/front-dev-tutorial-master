@@ -1,0 +1,51 @@
+$cBlack: black;
+$cWhite: white;
+
+.mobile-menu-icon {
+  background-color: transparent; // 透明を意味する。
+  border: none;
+  outline: none !important; // デフォルトでfocusがある時に青色の枠線が表示されるが、ここで無効化。
+  cursor: pointer; // クリックできる要素については、pointerにしてあげると親切。
+
+  & > span {
+    background-color: $cBlack;
+    width: 35px;
+    height: 2px;
+    display: block;
+    margin-bottom: 9px;
+    transition: transform 0.7s; // transitionは、移り変わりを定義するプロパティ(第2引数は、掛かる秒数)
+
+    &:last-child {
+      margin-bottom: 0px; // 3つのspanの内、1番下のmargin-bottomの指定は不要なので。
+    }
+  }
+}
+
+.menu-open {
+  background-color: $cBlack;
+
+  & .mobile-menu-icon {
+    & > span {
+      background-color: $cWhite;
+
+      &:nth-child(1) {
+        transition-delay: 70ms;
+        // translateY(11px)で、2番目の線と被らせる。
+        // rotate(135deg)で、時計回りに135度回転させる。
+        transform: translateY(11px) rotate(135deg);
+      }
+      &:nth-child(2) {
+        transition-delay: 0ms;
+        // x軸方向に拡大、縮小させる。
+        // 左側にはけさせるように、translateX(-18px)を設定。widthが35pxなので。
+        transform: translateX(-18px) scaleX(0)
+      }
+      &:nth-child(3) {
+        transition-delay: 140ms;
+        // translateY(-11px)で、2番目の線と被らせる。
+        // rotate(-135deg)で、反時計回りに135度回転させる(410でも良い(410 - 365 = 45))。
+        transform: translateY(-11px) rotate(-135deg);
+      }
+    }
+  }
+}

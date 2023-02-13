@@ -1,0 +1,35 @@
+$cWhite: white;
+$cBlack: black;
+
+#container {
+  text-align: center;
+}
+
+.btn {
+  background-color: $cWhite;
+  color: $cBlack;
+  border: 1px solid $cBlack;
+  padding: 10px 40px;
+  margin: 50px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &.floot {
+    &:hover {
+      // 影を設定するプロパティ
+      // 引数の意味は、開発ツールで確認するとよい
+      // (内側に影をつけたい時には、insetを先頭につける
+      // 1, 2は、影の位置。
+      // 3は、影のぼかし度。
+      // 4が記入されていれば、影の広がり。
+      // 最後は、影の色)
+      box-shadow: 5px 5px 10px rgb(0 0 0 / 50%);
+    }
+  }
+
+  // &:hover {
+  //   background-color: $cBlack;
+  //   color: $cWhite;
+  // }
+}

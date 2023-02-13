@@ -1,0 +1,39 @@
+$cBlack: black;
+
+.three-dot-spinner {
+  text-align: center;
+
+  & div {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: $cBlack;
+    border-radius: 50%; // 丸の円を表現できる。
+    animation: sk-bouncedelay 1.4s infinite // 第1: Keyframesの名前を設定, 第2: アニメーションが行われる間隔, 第3: どれくらい行うか
+  }
+
+  & .bounce1 {
+    animation-delay: -0.32s; // マイナスで設定すると、他の要素よりも早くanimationを適用することができる。
+  }
+
+  & .bounce2 {
+    animation-delay: -0.16s; // マイナスで設定すると、他の要素よりも早くanimationを適用することができる。
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0% {
+    // opacity: 0;
+    transform: scale(0); // 左右に2倍(x軸)。上下に1.1倍になる(y軸) (引数1つだと、上下左右に適用される)。
+  }
+  40% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0);
+  }
+  100% {
+    // opacity: 1;
+    transform: scale(1);
+  }
+}

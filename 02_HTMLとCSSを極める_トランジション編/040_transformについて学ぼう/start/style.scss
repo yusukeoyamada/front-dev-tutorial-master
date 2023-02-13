@@ -1,0 +1,22 @@
+.rect {
+  width: 100px;
+  height: 100px;
+
+  // ブロック要素に対して、中央揃え
+  margin: 0 auto;
+
+  background-color: orangered;
+
+  // 物体の位置を移動させる時に使う
+  // アニメーションを設定する際に役立つ
+  // transform: translate(50px, 50px); // 第1引数は、x軸(値が増えれば増えるほど、右に行く)。第2引数はy軸(値が増えれば増えるほど、下に行く)を表す。
+  // transform: translate(100%, 100%); // 左記表記だと物体1個分がxy軸方向に動く
+  // transform: translateX(100%); // 左記表記だと物体1個分がx軸方向に動く
+  // transform: translateY(100%); // 左記表記だと物体1個分がy軸方向に動く
+  // transform: rotate(30deg); // 30度右に傾く(x軸基準)。第2引数は、y軸
+  // transform: skew(30deg); // 30度右に斜めになる(x軸基準)。第2引数は、y軸
+  // transform: scale(2, 1.1); // 左右に2倍(x軸)。上下に1.1倍になる(y軸) (引数1つだと、上下左右に適用される)。
+  transform: translateX(50px) scaleY(2); // 複数設定する際には、左記のように
+  // transform-origin: top left; // 左上の角を基準に、transformが適用される。
+  // transform-origin: -20px -20px; // xy軸基準として、transformが適用される。
+}
