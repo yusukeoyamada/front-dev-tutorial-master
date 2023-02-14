@@ -21,6 +21,11 @@ $cMenuOpen: $cBlack;
     outline: none !important;
     cursor: pointer;
 
+    // これを追加することで、デスクトップで見る際に、非表示になる
+    @include mq(lg) {
+      display: none;
+    }
+
     & > span {
       background-color: $cMenuClose;
       width: 35px;

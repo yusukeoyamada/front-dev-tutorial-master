@@ -2,6 +2,92 @@
 @use "../globals/" as *;      // 「"../globals/index"」と同じ意味。
 @use "../parts/common" as *;
 
+#container {
+  // 「mobile-menu__btn」押下時のアニメーションを起動させる為
+  transition: transform 0.5s, box-shadow 0.5s;
+
+  // 以下で、「mobile-menu__btn」押下後に表示されるlogo部分が、押下前には見えなくなる。
+  position: relative;
+  z-index: 10;
+  background-color: $cWhite;
+}
+
+.header {
+  position: fixed;                  // これで、該当部分をウィンドウの上部に固定化できる
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $navHeight;
+  background-color: transparent;    // 初期状態では、透明に
+  z-index: 100;                     // 「ヘッダー」を前面にする為に
+
+  display: flex;
+  align-items: center;              // 上下中央揃えに
+
+  // jsで付与するクラス
+  // content方面にスクロールした時に、適用される
+  &.triggered {
+    background-color: rgba(255, 255, 255, 0.9); // 「255, 255, 255」で白色、「0.9」は透明度(「1」が最大)
+    box-shadow: 10px 0 25px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  &__inner {
+    display: flex;                  // 要素を横並びに(モバイル以外も横並びなので)
+    justify-content: space-between; // 左右端の隙間を無くし、均等に横方向に間を開ける
+    align-items: center;            // 上下中央揃えに
+
+    @extend .content-width;         // 「__inner」部分の左右の余白等を指定(headerは、「width: 100%」なので)
+                                    // 「id="content"」部分と左右の幅を合わせる為
+  }
+
+  &__nav {
+    @extend .flex;                  // navを媒体に応じて、横に並べたり、縦に並べたりする
+    justify-content: space-between; // 左右端の隙間を無くし、均等に横方向に間を開ける
+    align-items: center;            // 上下中央揃えになる
+    text-align: center;             // navの文字列を中央に
+
+    display: none;                  // スマホの時には、非表示に
+    @include mq(lg) {               // デスクトップの時には、表示
+      display: block;
+    }
+  }
+
+  &__ul {
+    // @extend .flex;               // 文字を媒体に応じて、変更する必要がないので
+    display: flex;                  // 横並びに
+    align-items: center;            // 上下中央揃えに
+
+    list-style: none;               //　「・」を消す処理
+    padding: 0;                     // デフォルトでulについている部分を消す
+  }
+
+  &__li {
+    margin: 10px;
+
+    // 以下のように、上下の幅を揃える処理をするのは大切
+    @include mq(md) {
+      margin-left: 0;
+      margin-right: 30px;
+    }
+
+    & > a {
+      color: $cBlack;
+      text-decoration: none;        // 下線を消す処理。「underline」が下線を指す。
+      text-transform: uppercase;    // 全ての文字を大文字に
+    }
+  }
+
+  // 「.logo」は別のところでも使うから、別途記述している。
+  & .logo {
+    font-size: 35px;                // ここは、一番下の「.logo」で指定しているものを上書いている
+    justify-content: center;        // 左右中央揃えにする為に
+
+    @include mq(md) {
+      justify-content: flex-start;  // 左側に寄せる為に
+    }
+  }
+}
+
 .travel {
   @extend .content-width;   // 「.travel」部分の左右の余白等を指定
   @extend .mb-lg;           // 「.travel」部分の下の余白を指定
@@ -213,5 +299,62 @@
     flex-basis: 100%;     // btnは、1つだけ並べるようにする
 
     @extend .mb-lg;       // 下の余白を指定
+  }
+}
+
+.footer {
+  padding: 60px 0;
+  @extend .content-width;           // 「.footer」部分の左右の余白等を指定
+
+  &__nav {
+    @extend .flex;                  // navを媒体に応じて、横に並べたり、縦に並べたりする
+    justify-content: space-between; // 左右端の隙間を無くし、均等に横方向に間を開ける
+    align-items: center;            // 上下中央揃えになる
+    text-align: center;             // navの文字列を中央に
+  }
+
+  &__ul {
+    @extend .flex;                  // 文字を媒体に応じて、横に並べたり、縦に並べたりする
+    list-style: none;               //　「・」を消す処理
+    padding: 0;                     // デフォルトでulについている部分を消す
+  }
+
+  &__li {
+    margin: 10px;
+
+    // 以下のように、上下の幅を揃える処理をするのは大切
+    @include mq(md) {
+      margin-left: 0;
+      margin-right: 30px;
+    }
+
+    & > a {
+      color: $cSubTitle;
+      text-decoration: none;        // 下線を消す処理。「underline」が下線を指す。
+    }
+  }
+
+  // 「.logo」は別のところでも使うから、別途記述している。
+  & > .logo {
+    font-size: 38px;
+    justify-content: center;        // 左右中央揃えにする為に
+
+    @include mq(md) {
+      justify-content: flex-start;  // 左側に寄せる為に
+    }
+  }
+}
+
+.logo {
+  font-size: 42px;
+  display: flex;                    // 横並びにする為に
+
+  &__img {
+    width: 0.7em;                   // 「em」は、上記「font-size」と相対的に決まる(「1em」なら、42px)
+                                    // 固定値だと、font-sizeに合わして変更しにくい
+  }
+
+  &__world {
+    color: $cWineRed;
   }
 }
