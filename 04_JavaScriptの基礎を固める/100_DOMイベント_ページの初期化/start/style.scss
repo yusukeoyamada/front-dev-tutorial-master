@@ -1,11 +1,12 @@
 strong {
-    display: block;
-    color: red;
+  display: block;
+  color: red;
 }
-.done {
-    color: green;
 
-    &::before{
-        content: '✔';
-    }
+.done {
+  color: green;
+
+  &::before{
+    content: '✔';
+  }
 }
