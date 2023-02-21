@@ -1,45 +1,150 @@
-$cBlack: black;
 $cWhite: white;
+$cBlack: black;
+$cSubTitle: #535353;
+$cMenuClose: $cBlack;
+$cMenuOpen: $cBlack;
 
-.mobile-menu-icon {
+body {
+  margin: 0; // デフォルトでmarginがついているので、それを消して左右の余白を無くす
+}
+
+#container {
+  position: relative;
+  background-color: teal;
+  height: 100vh; // ウィンドウのフルスクーンを高さとした
+  z-index: 2; // これでmobile-menuの前面に持って行かれた
+  transition: all 0.5s;
+}
+
+.header {
+  background-color: $cWhite;
+  height: 100px;
+  display: flex;
+  justify-content: flex-end; // 右側に寄せる
+  align-items: center; // 上下の中央揃え
+}
+
+.mobile-menu {
+  position: fixed; // これでcontainerの背面に持って行かれた(これだけじゃなくて、containerにz-indexも指定する)
+  right: 0; // 右側に寄せる
+  top: 60px; // 上から60px
+  width: 300px; // liは、「text-align: left」がデフォルト値
+
+  // mobile-menuを開いた際に、container部分を灰色する際に使用する
+  &__cover {
+    // 以下が、mobile-menuが開いていない状態
+    position: absolute; // container内の「mobile-menu__btn」よりは前面に来るように(メニューを開いた後に、メニューボタンが押しているというよりは、coverを押している??(質問から))
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0; // 透明度を0にするだけで、クリックできる(アニメーションの対象にはできる)
+    visibility: hidden; // 前面に来てしまっている為、mobile-menuアイコンが押せないので(クリックできない(アニメーションの対象にできない))
+
+    transition: opacity 1s;
+
+    cursor: pointer;
+  }
+
+  // sassの場合、以下のように、BEM(Block Element Modifier(hoverなどの状態を表す))で記載する
+    // 大規模なシステムだと、ネストを表現する際に「__」を入れて、sassを記載した方がわかりやすい
+  &__main {
+    padding: 0; // デフォルトのpaddingを削除
+    perspective: 2000px; // 3Dアニメーションをするには、親要素にこれを指定(奥行きを表す。2000px手前から見る)
+    transform-style: preserve-3d; // 3Dアニメーションをするには、親要素にこれを指定
+  }
+
+  &__item {
+    list-style: none; // 「・」が無くなる
+    display: block; // 横幅一杯に広がるように
+    transform: translate3d(0, 0, -1000px); // x, y, z(マイナスだと奥に)
+    padding: 0 40px; // 上下 左右
+    transition: transform 0.3s, opacity 0.2s;
+    opacity: 0;
+  }
+
+  &__link {
+    display: block;
+    margin-top: 30px; // block要素なら、marginが適用される。
+    color: $cBlack;
+    text-decoration: none; // 下線は不要
+  }
+
+  &__btn {
     background-color: unset;
     border: none;
     outline: none !important;
     cursor: pointer;
 
     & > span {
-        background-color: $cBlack;
-        width: 35px;
-        height: 2px;
-        display: block;
-        margin-bottom: 9px;
-        transition: transform 0.7s;
+      background-color: $cMenuClose;
+      width: 35px;
+      height: 2px;
+      display: block;
+      margin-bottom: 9px;
+      transition: transform 0.7s;
 
-        &:last-child {
-            margin-bottom: 0;
-        }
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
+  }
 }
 
 .menu-open {
-    background-color: $cBlack;
+  & #container {
+    transform: translate(-300px, 60px); // これで左下にズレる
+    box-shadow: 0 8px 40px -10px rgba(0, 0, 0, 0.8); // x, y, ぼかし, 拡散
+  }
 
-    & .mobile-menu-icon {
-        & > span {
-            background-color: $cWhite;
-
-            &:nth-child(1) {
-                transition-delay: 70ms;
-                transform: translateY(11px) rotate(135deg);
-            }
-            &:nth-child(2) {
-                transition-delay: 0s;
-                transform:  translateX(-18px) scaleX(0);
-            }
-            &:nth-child(3) {
-                transition-delay: 140ms;
-                transform: translateY(-11px) rotate(-135deg);
-            }
-        }
+  & .mobile-menu {
+    &__cover {
+      opacity: 1;
+      visibility: visible;
     }
+
+    &__item {
+      transform: none; // 値を無効化することで、奥側から現れるように見える
+      opacity: 1; // 値が出てくるように見える
+
+      // 今回はitem3つだが、将来を考慮して5にしている
+        // 以下で、少しずつ遅れて要素が出てくるようにしている
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          transition-delay: $i * 0.07s;
+        }
+      }
+    }
+
+    &__btn {
+      & > span {
+        background-color: $cMenuOpen;
+
+        &:nth-child(1) {
+          transition-delay: 70ms;
+          transform: translateY(11px) rotate(135deg);
+        }
+        &:nth-child(2) {
+          transition-delay: 0s;
+          transform:  translateX(-18px) scaleX(0);
+        }
+        &:nth-child(3) {
+          transition-delay: 140ms;
+          transform: translateY(-11px) rotate(-135deg);
+        }
+      }
+    }
+  }
+}
+
+.main-title {
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.sub-title {
+  display: block; // 画面一杯に広がるので、main-titleと同じ行にならない(折り返す)
+  font-size: 14px;
+  color: $cSubTitle;
 }

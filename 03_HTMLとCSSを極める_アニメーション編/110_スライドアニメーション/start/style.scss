@@ -6,6 +6,7 @@ img {
   vertical-align: bottom; // 擬似要素と、画像の下部分に差異がある為、それを修正。下余白を無くせる。
 }
 
+// 以下でafter擬似要素が、左から右にslideするのを表現
 .cover-slide {
   position: relative;
   overflow: hidden; // 「scale(1.5)」の際に、画像が枠からはみ出ないようにする。
@@ -52,6 +53,7 @@ img {
   }
 }
 
+// 以下でimgがズームしているのを表現
 .img-zoom {
   opacity: 0;
 
@@ -90,6 +92,7 @@ img {
   }
 }
 
+// 以下で、before擬似要素を使って、hover時に暗くなるのを表現
 .hover-darken {
   &::before {
     content: '';
@@ -116,6 +119,7 @@ img {
   }
 }
 
+// 以下は、imgをbackground-imageで表現する場合
 .bg-img-zoom {
   background-image: url(images/image-1.jpg);
   background-repeat: no-repeat;

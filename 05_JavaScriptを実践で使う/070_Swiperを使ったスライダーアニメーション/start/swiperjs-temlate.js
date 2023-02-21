@@ -1,4 +1,6 @@
 // Swiperのサイトからコピーしてくるコードです。（JavaScript用）
+// 以下を、main.jsに貼り付け
+
 const swiper = new Swiper(".swiper", {
   // Optional parameters
   direction: "vertical",

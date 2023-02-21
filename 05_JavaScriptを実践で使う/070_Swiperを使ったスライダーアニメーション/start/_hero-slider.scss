@@ -1,0 +1,127 @@
+@use "mixin" as *;
+
+$cWhite: white;
+
+.swiper {
+  // width: 100%;
+  // // width: 600px;
+  // height: 300px;
+
+  // デフォルトで、hiddenがついていることにより、画像が見えなくなっている部分あり
+  overflow: visible !important;
+}
+
+.swiper-slide {
+  height: 500px;
+  overflow: hidden;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover; // imgの上下左右が、親要素のdivと同じ大きさになるように
+
+    // (img1)以下で拡大した後
+    transform: scale(1.3);
+    transition: transform 1.9s ease;
+  }
+
+  // 画像に薄い背景色を設定
+  &::after {
+    content: '';
+    // 以下で画像に覆い被さるように設定
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 61, 125, 0.1);
+  }
+
+  &-active {
+    & > img {
+      // (img2)以下で元に戻すことで、画像が引くアニメーションになる
+      transform: none;
+    }
+
+    & .hero__title {
+      // (text2)以下で元に戻すことで、テキストが下から上に現れるようなアニメーションになる
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.hero {
+  &__title {
+    // 「swiper-slide」に「position: relative」がついている(「swiper-bundle.min.css」にて)
+    // 以下にて、テキストを画像の真ん中に配置
+      // 以下のセットで、要素を重ねて真ん中に配置できる。
+        // 現時点での重なりの順番的には、(前面) テキスト <= 画像 <= 画像(footer) (背面)
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 20px)); // calc()で計算処理
+    z-index: 2; // これで、上記「::after」で設定した薄い背景色の前面にテキストがくる。
+
+    color: $cWhite;
+    font-size: 25px;
+
+    // (text1)以下と、上記「transform」で下方向に移動した後
+    opacity: 0;
+    transition: opacity 0.3s ease 1s, transform 0.3s ease 1s; // 最後の「1s」は、delay
+  }
+
+  &__footer {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 2; // 今のままだと、「swiper-slide」の画像より背面にいるため
+
+    // 以下にて、「__downarrow」、「__scrolltext」が、横に格納される幅になる。
+    height: 68px;
+    width: 22px;
+
+    overflow: hidden; // 当該要素からはみ出た部分は非表示に
+  }
+
+  &__downarrow {
+    // 「&__footer」に「position: absolute」が設定され、ローカルコンテキストが生成されているので、
+    // 「&__footer」の位置から、left, bottomの設定となる。
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 6px; // 横幅が縮むので、それに応じて縦幅も縮む
+
+    @include animation(
+      $name: kf-arrow-anime,
+      $iteration-count: infinite, // アニメーションの実行回数を指定
+      $duration: 2s,
+      $timing-function: linear, // 時間経過によって、特に変化量が変わらない
+    );
+  }
+
+  &__scrolltext {
+    position: absolute;
+    transform: rotate(90deg);
+    left: -8px;
+    top: 11px;
+
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2em;
+  }
+}
+
+// 下に矢印が進んだり戻ったりするように見えるアニメーション
+@keyframes kf-arrow-anime {
+  0%,
+  50%,
+  100% {
+    transform: translateY(-10%);
+  }
+  30% {
+    transform: none;
+  }
+}

@@ -8,6 +8,7 @@ img {
 .cover-slide {
   position: relative;
   overflow: hidden;
+  margin-bottom: 80vh; // vhは、ブラウザウィンドウの高さの割合
 
   &::after {
     content: "";
@@ -136,7 +137,7 @@ img {
 
 .img-bg50 {
   position: relative;
-  
+
   &::before {
     display: block;
     content: '';
