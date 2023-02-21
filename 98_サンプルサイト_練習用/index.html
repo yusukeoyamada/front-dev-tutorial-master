@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+
+    <!-- 以下は、ページローダー用の「css/js」(何故ここに記述したのかは不明なので、移動してみた) -->
+    <!-- <script src="scripts/vendors/pace.js"></script> -->
+    <!-- <link rel="stylesheet" href="styles/loader.css" /> -->
+
     <!-- 以下は、Google_fontsを読み込む為のもの -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,9 +17,13 @@
       href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&family=Noto+Sans+JP:wght@500&display=swap"
       rel="stylesheet"
     />
+
     <!-- リセットcssは、styleを一番先に読み込まないと駄目 -->
     <link rel="stylesheet" href="styles/vendors/css-reset.css" />
+    <!-- ヒーロースライダー部分で使用 -->
     <link rel="stylesheet" href="styles/vendors/swiper-bundle.min.css" />
+    <!-- ページローダー部分で使用 -->
+    <link rel="stylesheet" href="styles/loader.css" />
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
@@ -81,6 +90,15 @@
           </div>
           <!-- 以下、ヒーロースライダー以外の部分 -->
           <div id="main-content">
+            <!-- サイドバーの左側 -->
+            <aside class="side left">
+              <!-- asideタグは、付加的な情報を記述する際に使う(サイドバーなど) -->
+              <div class="side__inner">
+                <a href="#" class="twitter icon tween-animate-title">Twitter</a>
+                <a href="#" class="fb icon tween-animate-title"> Facebook </a>
+              </div>
+            </aside>
+
             <!-- mainタグが、ページのmainコンテンツを収めるタグを意味する -->
             <main>
               <!-- 以下で、「Travel the world」部分を実装する -->
@@ -238,6 +256,14 @@
                 </div>
               </section>
             </main>
+
+            <!-- サイドバーの右側 -->
+            <aside class="side right">
+              <!-- asideタグは、付加的な情報を記述する際に使う(サイドバーなど) -->
+              <div class="side__inner">
+                <span class="tween-animate-title">&copy; Code Mafia</span>
+              </div>
+            </aside>
           </div>
         </div>
         <!-- 以下、フッター部分 -->
@@ -306,6 +332,9 @@
     </div>
     <!-- 「text-animation.js」部分で使用 -->
     <script src="scripts/vendors/gsap.min.js"></script>
+
+    <!-- ページローダー部分で使用 -->
+    <script src="scripts/vendors/pace.js"></script>
 
     <!-- ヒーロースライダー部分で使用 -->
     <script src="scripts/vendors/swiper-bundle.min.js"></script>

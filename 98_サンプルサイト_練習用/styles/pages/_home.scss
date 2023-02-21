@@ -12,6 +12,19 @@
   background-color: $cWhite;
 }
 
+// popularの灰色背景でサイドバー部分が隠れてしまうので、以下を設定
+#main-content {
+  position: relative;
+  z-index: 0;
+}
+
+// popularの灰色背景でサイドバー部分が隠れてしまうので、以下を設定
+  // main-contentの中で、mainが1番背面になる。
+main {
+  position: relative;
+  z-index: -1;
+}
+
 .header {
   position: fixed;                  // これで、該当部分をウィンドウの上部に固定化できる
   top: 0;
@@ -66,8 +79,8 @@
 
     // 以下のように、上下の幅を揃える処理をするのは大切
     @include mq(md) {
-      margin-left: 0;
-      margin-right: 30px;
+      margin-left: 30px;
+      margin-right: 0;
     }
 
     & > a {
@@ -86,6 +99,10 @@
       justify-content: flex-start;  // 左側に寄せる為に
     }
   }
+}
+
+.hero {
+  @extend .pb-lg;
 }
 
 .travel {
@@ -356,5 +373,73 @@
 
   &__world {
     color: $cWineRed;
+  }
+}
+
+// サイドバー部分で使用
+.side {
+  // スマホの時は出す必要がないので
+  display: none;
+
+  position: fixed; // スクロールに追随して欲しいので、固定化する
+  top: 70%;
+  transform: translateY(-50%);
+
+  @include mq(xl) {
+    display: block;
+  }
+
+  & .tween-animate-title {
+    color: $cBlack;
+    text-decoration: none !important; // 下線を無くす(hoverした時でも)
+    margin: 0 40px;
+    vertical-align: middle; // 上下の中央揃え
+    letter-spacing: 2px; // 文字間隔(Twitterなどの)を調整
+  }
+
+  &.left {
+    left: 50px;
+
+    & .side__inner {
+      transform-origin: top left; // 文字列の左上から回転するように(デフォルトは真ん中)
+      transform: rotate(-90deg); // 反時計回りに90度
+    }
+  }
+
+  &.right {
+    right: 50px;
+
+    & .side__inner {
+      transform-origin: top right; // 文字列の左上から回転するように(デフォルトは真ん中)
+      transform: rotate(90deg); // 反時計回りに90度
+    }
+  }
+}
+
+// サイドバー部分のTwitter_iconなどで使用
+.icon {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%; // 上下中央揃え
+    left: -20px;
+    // 以下1文字分の大きさに
+    width: 1em;
+    height: 1em;
+    transform: translateY(-50%);
+
+    background-position: center;
+    background-repeat: none; // backgroudの表示を繰り返さない
+    background-size: contain; // 画像が切れることがなくなる
+  }
+
+  &.twitter::before {
+    background-image: url(../images/twitter.svg); // sassからだと、「url(../../images/twitter.svg)」だが、style.cssの階層に合わせる
+  }
+
+  &.fb::before {
+    background-image: url(../images/facebook.svg); // sassからだと、「url(../../images/twitter.svg)」だが、style.cssの階層に合わせる
   }
 }
