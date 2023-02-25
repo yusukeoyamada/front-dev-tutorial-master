@@ -133,10 +133,16 @@ main {
   &__img {
     height: 300px;
     @extend .mb-sm;
-    box-shadow: inset 0 0 30px $cBlack;      // 内側に影をつける場合
+
+    // 以下にて、「$duration: 1.6s」になっていたので、合わせた
+      // 参考: 98_サンプルサイト_練習用/styles/parts/_image-slide.scss
+    transition: box-shadow 0.5s ease 1.6s; // 最後の引数は、delay
+    &.inview {
+      box-shadow: inset 0 0 30px $cBlack; // 内側に影をつける場合
+    }
 
     @include mq(md) {
-      flex-basis: 47%;      // 画像とテキストを横に並べる際には、2つ並べるようにする(余白含め)
+      flex-basis: 47%; // 画像とテキストを横に並べる際には、2つ並べるようにする(余白含め)
     }
 
     @include mq(lg) {
@@ -384,6 +390,7 @@ main {
   position: fixed; // スクロールに追随して欲しいので、固定化する
   top: 70%;
   transform: translateY(-50%);
+  transition: all 0.3s ease;
 
   @include mq(xl) {
     display: block;
@@ -398,7 +405,13 @@ main {
   }
 
   &.left {
-    left: 50px;
+    // 以下により、デフォルトが画面外に表示されるように
+    left: -50px;
+
+    // 以下により、画面内に表示されるように
+    &.inview {
+      left: 50px;
+    }
 
     & .side__inner {
       transform-origin: top left; // 文字列の左上から回転するように(デフォルトは真ん中)
@@ -407,7 +420,13 @@ main {
   }
 
   &.right {
-    right: 50px;
+    // 以下により、デフォルトが画面外に表示されるように
+    right: -50px;
+
+    // 以下により、画面内に表示されるように
+    &.inview {
+      right: 50px;
+    }
 
     & .side__inner {
       transform-origin: top right; // 文字列の左上から回転するように(デフォルトは真ん中)

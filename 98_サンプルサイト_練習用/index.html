@@ -25,6 +25,22 @@
     <!-- ページローダー部分で使用 -->
     <link rel="stylesheet" href="styles/loader.css" />
     <link rel="stylesheet" href="styles/style.css" />
+
+    <!-- 「text-animation.js」部分で使用 -->
+    <script src="scripts/vendors/gsap.min.js" defer></script>
+    <!-- ページローダー部分で使用 -->
+    <script src="scripts/vendors/pace.js" defer></script>
+    <!-- ヒーロースライダー部分で使用 -->
+    <script src="scripts/vendors/swiper-bundle.min.js" defer></script>
+    <script src="scripts/libs/hero-slider.js" defer></script>
+    <!-- 「House セクション」の「Find Your House」部分で使用 -->
+    <script src="scripts/vendors/scroll-polyfill.js" defer></script>
+    <script src="scripts/libs/scroll.js" defer></script>
+    <!-- 「Header セクション」の「mobile-menu__btn」部分で使用 -->
+    <script src="scripts/libs/mobile-menu.js" defer></script>
+    <!-- 「House セクション」の「Find Your House」部分でも使用 -->
+    <script src="scripts/libs/text-animation.js" defer></script>
+    <script src="scripts/main.js" defer></script>
   </head>
   <body>
     <div id="global-container">
@@ -33,9 +49,9 @@
         <div class="mobile-menu__cover"></div>
         <div class="nav-trigger"></div>
         <header class="header">
-          <div class="header__inner">
+          <div class="header__inner appear up">
             <!-- 以下、logo部分 -->
-            <div class="logo">
+            <div class="logo item">
               <img class="logo__img" src="images/logo.svg" />
               <span class="logo__stay">Stay</span>
               <span class="logo__world">World</span>
@@ -43,13 +59,13 @@
             <!-- 以下、nav部分 -->
             <nav class="header__nav">
               <ul class="header__ul">
-                <li class="header__li">
+                <li class="header__li item">
                   <a href="#">Service</a>
                 </li>
-                <li class="header__li">
+                <li class="header__li item">
                   <a href="#">Company</a>
                 </li>
-                <li class="header__li">
+                <li class="header__li item">
                   <a class="btn filled" href="#">Contact </a>
                 </li>
               </ul>
@@ -104,24 +120,26 @@
               <!-- 以下で、「Travel the world」部分を実装する -->
               <section class="travel">
                 <div class="travel__inner">
-                  <div class="travel__img">
+                  <div class="travel__img cover-slide">
                     <img class="img-zoom" src="images/image-travel.jpg" />
                   </div>
-                  <div class="travel__texts inview">
+                  <div class="travel__texts appear left">
                     <div class="travel__texts-inner">
-                      <div class="travel__title main-title">
+                      <div class="travel__title main-title item">
                         <span class="purple">Travel</span>
                         <span>the world</span>
                       </div>
-                      <div class="travel__sub sub-title">世界中を旅しよう</div>
-                      <div class="travel__description">
+                      <div class="travel__sub sub-title item">
+                        世界中を旅しよう
+                      </div>
+                      <div class="travel__description item">
                         <p>
                           世界１５０ヶ国で<br />
                           利用できる民泊サービスです。
                         </p>
                         <p>あなたの望む宿がきっと見つかります。</p>
                       </div>
-                      <div class="travel__btn">
+                      <div class="travel__btn item">
                         <button class="btn filled">もっと詳しく</button>
                       </div>
                     </div>
@@ -206,8 +224,8 @@
                     </div>
                     <p class="houses__title">House 6</p>
                   </div>
-                  <div class="houses__btn">
-                    <button class="btn slide-bg">もっと詳しく</button>
+                  <div class="houses__btn appear up">
+                    <button class="btn slide-bg item">もっと詳しく</button>
                   </div>
                 </div>
               </section>
@@ -220,35 +238,35 @@
                   </p>
                 </div>
                 <!-- 背景灰色部分を分けて表示させる為に、以下のように「inner」と「container」を設定 -->
-                <div class="popular__inner">
+                <div class="popular__inner appear up">
                   <div class="popular__container">
-                    <div class="popular__item">
+                    <div class="popular__item item">
                       <div class="popular__img">
                         <img src="images/image-p1.jpg" alt="" />
                       </div>
                       <p class="popular__title">パリ</p>
                     </div>
-                    <div class="popular__item">
+                    <div class="popular__item item">
                       <div class="popular__img">
                         <img src="images/image-p2.jpg" alt="" />
                       </div>
                       <p class="popular__title">ニューヨーク</p>
                     </div>
-                    <div class="popular__item">
+                    <div class="popular__item item">
                       <div class="popular__img">
                         <img src="images/image-p3.jpg" alt="" />
                       </div>
                       <p class="popular__title">香港</p>
                     </div>
-                    <div class="popular__item">
+                    <div class="popular__item item">
                       <div class="popular__img">
                         <img src="images/image-p4.jpg" alt="" />
                       </div>
                       <p class="popular__title">大阪</p>
                     </div>
-                    <div class="popular__btn">
+                    <div class="popular__btn appear up">
                       <!-- ここは、「slide-bg」でも特に問題なし。その場合、spanタグは外す -->
-                      <button class="btn cover-3d">
+                      <button class="btn cover-3d item">
                         <span>一覧から探す</span>
                       </button>
                     </div>
@@ -267,8 +285,8 @@
           </div>
         </div>
         <!-- 以下、フッター部分 -->
-        <div class="footer">
-          <div class="logo">
+        <div class="footer appear up">
+          <div class="logo item">
             <img class="logo__img" src="images/logo.svg" />
             <span class="logo__stay">Stay</span>
             <span class="logo__world">World</span>
@@ -279,20 +297,20 @@
             (1) コードの可読性が良い
             (2) 内部SEO的に評価される -->
             <ul class="footer__ul">
-              <li class="footer__li">
+              <li class="footer__li item">
                 <a href="#">Service</a>
               </li>
-              <li class="footer__li">
+              <li class="footer__li item">
                 <a href="#">Contact</a>
               </li>
-              <li class="footer__li">
+              <li class="footer__li item">
                 <a href="#">Company</a>
               </li>
-              <li class="footer__li">
+              <li class="footer__li item">
                 <a href="#">Sitemap</a>
               </li>
             </ul>
-            <div class="footer__copyright">
+            <div class="footer__copyright item">
               <!-- 「&copy;」で、コピーライト「©」を表す -->
               &copy; Code Mafia
             </div>
@@ -330,25 +348,5 @@
         </ul>
       </nav>
     </div>
-    <!-- 「text-animation.js」部分で使用 -->
-    <script src="scripts/vendors/gsap.min.js"></script>
-
-    <!-- ページローダー部分で使用 -->
-    <script src="scripts/vendors/pace.js"></script>
-
-    <!-- ヒーロースライダー部分で使用 -->
-    <script src="scripts/vendors/swiper-bundle.min.js"></script>
-    <script src="scripts/libs/hero-slider.js"></script>
-
-    <!-- 「House セクション」の「Find Your House」部分で使用 -->
-    <script src="scripts/vendors/scroll-polyfill.js"></script>
-    <script src="scripts/libs/scroll.js"></script>
-
-    <!-- 「Header セクション」の「mobile-menu__btn」部分で使用 -->
-    <script src="scripts/libs/mobile-menu.js"></script>
-
-    <!-- 「House セクション」の「Find Your House」部分でも使用 -->
-    <script src="scripts/libs/text-animation.js"></script>
-    <script src="scripts/main.js"></script>
   </body>
 </html>

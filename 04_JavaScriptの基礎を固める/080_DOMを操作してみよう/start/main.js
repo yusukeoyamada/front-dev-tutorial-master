@@ -1,4 +1,5 @@
 // DOM(Document Object Model)は、HTMLをjsから操作できるようにしたインターフェース
+  // HTMLをオブジェクト形式で表したもの
 // jsからは、DOM_API(DOMインターフェース)を通じて、htmlの情報を取得・変更する。
 // 情報の取得・変更・イベントの登録ができる。
 
@@ -6,6 +7,7 @@
 //「document」は、1つのhtmlの情報が格納されているオブジェクト
   // document.body, document.headで要素を取れる
 // このような階層をDOMツリーと呼ばれる
+  // ノード(html, body, head)が集まって、DOMツリーが形成される。
 
 // document.querySelector('#main-title')
   // ID指定の場合は、上記
